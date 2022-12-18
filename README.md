@@ -1,4 +1,4 @@
-# api_app
+# A Starter Flutter Laravel Project
 
 A new Flutter project.
 
