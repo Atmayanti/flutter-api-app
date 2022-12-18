@@ -2,6 +2,7 @@ import 'package:api_app/services/login_service.dart';
 import 'package:api_app/views/createcategorypage.dart';
 import 'package:api_app/views/homepage.dart';
 import 'package:api_app/views/loginpage.dart';
+import 'package:api_app/views/registerpage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +18,7 @@ class MainApp extends StatelessWidget {
       routes: {
         '/homepage': (context) => HomePage(),
         '/login': (context) => MainApp(),
+        '/register': (context) => Register(),
         '/category/add': (context) => AddCategory(),
       },
       home: LoginPage(),

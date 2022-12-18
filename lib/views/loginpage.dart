@@ -92,7 +92,24 @@ class _LoginPageState extends State<LoginPage> {
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
-              )
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Don't have an account?"),
+                  TextButton(
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all(
+                        Colors.blue,
+                      ),
+                    ),
+                    child: const Text('Register'),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/register');
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
         ),

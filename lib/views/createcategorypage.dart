@@ -1,6 +1,7 @@
 import 'package:api_app/services/category_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
+import 'package:api_app/views/homepage.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class AddCategory extends StatefulWidget {
@@ -44,7 +45,6 @@ class _AddCategoryState extends State<AddCategory> {
                       if (value == null || value.isEmpty) {
                         return 'You Must fill this form';
                       }
-                      return null;
                     },
                     controller: _addcategory,
                     decoration: const InputDecoration(
@@ -74,18 +74,17 @@ class _AddCategoryState extends State<AddCategory> {
                         ),
                       ),
                       onPressed: () async {
+                        bool response = await categoryService.addCategory(
+                          _addcategory.text,
+                        );
                         
-                        if (_addcategorykey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-                          bool response = await categoryService.addCategory(
-                            _addcategory.text,
-                          );
-
                           if (response) {
-                            print('main:' + response.toString());
-                            Navigator.of(context).popAndPushNamed('/homepage');
-                          } else {}
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ),
+                          );
                         }
                       },
                       child: const Text('Submit'),
