@@ -97,14 +97,17 @@ class _HomePageState extends State<HomePage> {
                                             AlertDialog(
                                           title:
                                               const Text('Deleting Category'),
-                                              backgroundColor: const Color(0xFFDCD6F7),
+                                          backgroundColor:
+                                              const Color(0xFFDCD6F7),
                                           content: const Text(
                                               'Are sure want to delete this category?'),
                                           actions: <Widget>[
                                             TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  context, 'No'),
-                                              child: const Text('No', style: TextStyle(
+                                              onPressed: () =>
+                                                  Navigator.pop(context, 'No'),
+                                              child: const Text(
+                                                'No',
+                                                style: TextStyle(
                                                     color: Color(0xFF424874)),
                                               ),
                                             ),
@@ -114,7 +117,9 @@ class _HomePageState extends State<HomePage> {
                                                 setState(() {}),
                                                 Navigator.pop(context, 'Yes'),
                                               },
-                                              child: const Text('Yes', style: TextStyle(
+                                              child: const Text(
+                                                'Yes',
+                                                style: TextStyle(
                                                     color: Color(0xFF424874)),
                                               ),
                                             ),
@@ -136,13 +141,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+              margin: const EdgeInsets.fromLTRB(0, 20, 0, 15),
               child: MaterialButton(
                 minWidth: 500,
-                height: 60,
+                height: 50,
                 child: Text(
                   "Add New Category",
-                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                  style: const TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 color: const Color(0xFFA6B1E1),
                 onPressed: () {
@@ -152,10 +157,10 @@ class _HomePageState extends State<HomePage> {
             ),
             MaterialButton(
               minWidth: 500,
-              height: 60,
+              height: 50,
               child: Text(
                 "Logout",
-                style: const TextStyle(color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
               color: const Color(0xFF424874),
               onPressed: () {

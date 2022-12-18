@@ -18,17 +18,27 @@ class _AddCategoryState extends State<AddCategory> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF4EEFF),
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: const Text("Add New Category"),
+        backgroundColor: const Color(0xFF424874),
+        centerTitle: true,
+        elevation: 0,
+        title: const Text(
+          'Add Category Page',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        
         children: [
           const Text(
-            'Add new Category',
+            'Add New Category',
             style: TextStyle(
-              color: Colors.blue,
+              color: const Color(0xFF424874),
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -51,12 +61,12 @@ class _AddCategoryState extends State<AddCategory> {
                       labelText: 'Category name',
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            width: 1, color: Color.fromARGB(255, 0, 102, 255)),
+                            width: 1, color: Color.fromARGB(255, 61, 14, 168)),
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 1,
-                          color: Colors.blue,
+                          color: const Color(0xFF424874),
                         ),
                       ),
                     ),
@@ -66,11 +76,11 @@ class _AddCategoryState extends State<AddCategory> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    height: 35,
+                    height: 45,
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.blue,
+                          const Color(0xFF424874),
                         ),
                       ),
                       onPressed: () async {
@@ -85,7 +95,10 @@ class _AddCategoryState extends State<AddCategory> {
                                   .popAndPushNamed('/homepage'));
                         }
                       },
-                      child: const Text('Submit'),
+                      child: const Text(
+                        'Submit',
+                        style: TextStyle(fontSize: 18),
+                      ),
                     ),
                   ),
                 ],
