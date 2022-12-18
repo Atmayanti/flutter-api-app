@@ -33,13 +33,13 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/category/add');
-        },
-        backgroundColor: Colors.blue,
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.pushNamed(context, '/category/add');
+      //   },
+      //   backgroundColor: Colors.blue,
+      //   child: const Icon(Icons.add),
+      // ),
       body: Container(
         margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
         child: Column(
@@ -69,6 +69,21 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 15),
+              child: MaterialButton(
+                minWidth: 500,
+                height: 60,
+                child: Text(
+                  "Add New Category",
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                color: Colors.blue,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/category/add');
+                },
+              ),
+            ),
             MaterialButton(
               minWidth: 500,
               height: 60,
@@ -76,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                 "Logout",
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
-              color: Colors.blue,
+              color: Colors.red,
               onPressed: () {
                 logout.postDataLogout().then(
                       (value) => Navigator.of(context).popAndPushNamed('/login'),

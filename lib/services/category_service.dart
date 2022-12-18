@@ -41,13 +41,7 @@ class CategoryService {
           'name': name,
         },
       );
-
       if (response.statusCode == 201) {
-        print('token : ' + response.body);
-        await storage.write(
-          key: 'token',
-          value: jsonDecode(response.body)['token'],
-        );
         return true;
       } else {
         print(response.statusCode);
