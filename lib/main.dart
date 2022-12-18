@@ -1,5 +1,5 @@
-import 'package:api_app/services/login_service.dart';
 import 'package:api_app/views/createcategorypage.dart';
+import 'package:api_app/views/editcategorypage.dart';
 import 'package:api_app/views/homepage.dart';
 import 'package:api_app/views/loginpage.dart';
 import 'package:api_app/views/registerpage.dart';
@@ -16,10 +16,11 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/homepage': (context) => HomePage(),
-        '/login': (context) => MainApp(),
-        '/register': (context) => Register(),
-        '/category/add': (context) => AddCategory(),
+        '/homepage': (context) => const HomePage(),
+        '/login': (context) => const MainApp(),
+        '/register': (context) => const Register(),
+        '/category/add': (context) => const AddCategory(),
+        '/category/update': (context) => const UpdateCategory(),
       },
       home: LoginPage(),
     );

@@ -1,32 +1,36 @@
-import 'package:api_app/services/Category_service.dart';
+import 'package:api_app/services/category_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class AddCategory extends StatefulWidget {
-  const AddCategory({super.key});
+class UpdateCategory extends StatefulWidget {
+  const UpdateCategory({super.key});
 
   @override
-  State<AddCategory> createState() => _AddCategoryState();
+  State<UpdateCategory> createState() => _UpdateCategoryState();
 }
 
-class _AddCategoryState extends State<AddCategory> {
-  @override
-  final _addcategorykey = GlobalKey<FormState>();
-  final TextEditingController _addcategory = TextEditingController();
-  CategoryService categoryService = CategoryService();
+class _UpdateCategoryState extends State<UpdateCategory> {
+  final TextEditingController _categoryname = TextEditingController();
+  final _updatekey = GlobalKey<FormState>();
 
+  final CategoryService cs = CategoryService();
+
+  @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as List<dynamic>;
+
+    if (args[1] != null) {
+      _categoryname.text = args[1];
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Text("Add New Category"),
+        title: const Text("Update Category"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            'Add new Category',
+            'Update Category',
             style: TextStyle(
               color: Colors.blue,
               fontSize: 24,
@@ -34,24 +38,24 @@ class _AddCategoryState extends State<AddCategory> {
             ),
           ),
           Form(
-            key: _addcategorykey,
+            key: _updatekey,
             child: Padding(
               padding: const EdgeInsets.all(50.0),
               child: Column(
                 children: [
                   TextFormField(
-                    // The validator receives the text that the user has entered.
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Category should not empty';
                       }
                     },
-                    controller: _addcategory,
+                    controller: _categoryname,
                     decoration: const InputDecoration(
                       labelText: 'Category name',
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            width: 1, color: Color.fromARGB(255, 0, 102, 255)),
+                            width: 1, color: Colors.blue,
+                        ),
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -74,18 +78,13 @@ class _AddCategoryState extends State<AddCategory> {
                         ),
                       ),
                       onPressed: () async {
-                        if (_addcategorykey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-                          await categoryService
-                              .addCategory(
-                                _addcategory.text,
-                              )
-                              .then((value) => Navigator.of(context)
-                                  .popAndPushNamed('/homepage'));
+                        if (_updatekey.currentState!.validate()) {
+                          cs.requestUpdate(args[0], _categoryname.text).then(
+                                (value) => Navigator.of(context).pop(true),
+                              );
                         }
                       },
-                      child: const Text('Submit'),
+                      child: const Text('Update'),
                     ),
                   ),
                 ],

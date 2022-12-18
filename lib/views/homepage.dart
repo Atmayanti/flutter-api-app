@@ -64,7 +64,15 @@ class _HomePageState extends State<HomePage> {
                                       height: 10,
                                     ),
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        var data = await Navigator.of(context)
+                                            .pushNamed('/category/update',
+                                                arguments: [e.id, e.name]);
+                                        if (data != null) {
+                                          await getData();
+                                          setState(() {});
+                                        }
+                                      },
                                       color: Colors.blue,
                                       icon: const Icon(Icons.edit),
                                     ),
