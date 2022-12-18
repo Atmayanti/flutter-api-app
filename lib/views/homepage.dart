@@ -1,5 +1,5 @@
 import 'package:api_app/models/Category.dart';
-import 'package:api_app/services/Category_service.dart';
+import 'package:api_app/services/category_service.dart';
 import 'package:flutter/material.dart';
 import 'package:api_app/services/logout_service.dart';
 
@@ -11,7 +11,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   List<Category> listCategory = [];
   final cs = CategoryService();
 
@@ -33,13 +32,6 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.pushNamed(context, '/category/add');
-      //   },
-      //   backgroundColor: Colors.blue,
-      //   child: const Icon(Icons.add),
-      // ),
       body: Container(
         margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
         child: Column(
@@ -57,7 +49,38 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.blueGrey[50],
                               child: Padding(
                                 padding: const EdgeInsets.all(20.0),
-                                child: Text(e.name),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 330,
+                                      child: Text(
+                                        e.name,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      color: Colors.blue,
+                                      icon: const Icon(Icons.edit),
+                                    ),
+                                    IconButton(
+                                      onPressed: () async {
+                                        await cs.requestDelete(e);
+                                        setState(() {});
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                    
+                                  ],
+                                ),
                               ),
                             ),
                           )
@@ -94,7 +117,8 @@ class _HomePageState extends State<HomePage> {
               color: Colors.red,
               onPressed: () {
                 logout.postDataLogout().then(
-                      (value) => Navigator.of(context).popAndPushNamed('/login'),
+                      (value) =>
+                          Navigator.of(context).popAndPushNamed('/login'),
                     );
               },
             ),
