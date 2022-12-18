@@ -27,4 +27,34 @@ class CategoryService {
 
     return payload.map((e) => Category.fromJson(e)).toList();
   }
+
+  Future addCategory(String name) async {
+    String? token = await storage.read(key: 'token');
+    try {
+      final response = await http.post(
+        Uri.parse(_baseURL + 'category'),
+        headers: {
+          'Accept': 'application/json',
+          "Authorization": "Bearer $token",
+        },
+        body: {
+          'name': name,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        print('token : ' + response.body);
+        await storage.write(
+          key: 'token',
+          value: jsonDecode(response.body)['token'],
+        );
+        return true;
+      } else {
+        print(response.statusCode);
+        return false;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

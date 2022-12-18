@@ -33,6 +33,13 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/category/add');
+        },
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.add),
+      ),
       body: Container(
         margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
         child: Column(
