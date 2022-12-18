@@ -96,22 +96,27 @@ class _HomePageState extends State<HomePage> {
                                         builder: (BuildContext context) =>
                                             AlertDialog(
                                           title:
-                                              const Text('AlertDialog Title'),
+                                              const Text('Deleting Category'),
+                                              backgroundColor: const Color(0xFFDCD6F7),
                                           content: const Text(
-                                              'AlertDialog description'),
+                                              'Are sure want to delete this category?'),
                                           actions: <Widget>[
                                             TextButton(
                                               onPressed: () => Navigator.pop(
-                                                  context, 'Cancel'),
-                                              child: const Text('Cancel'),
+                                                  context, 'No'),
+                                              child: const Text('No', style: TextStyle(
+                                                    color: Color(0xFF424874)),
+                                              ),
                                             ),
                                             TextButton(
                                               onPressed: () async => {
                                                 await cs.requestDelete(e),
                                                 setState(() {}),
-                                                Navigator.pop(context, 'OK'),
+                                                Navigator.pop(context, 'Yes'),
                                               },
-                                              child: const Text('OK'),
+                                              child: const Text('Yes', style: TextStyle(
+                                                    color: Color(0xFF424874)),
+                                              ),
                                             ),
                                           ],
                                         ),
