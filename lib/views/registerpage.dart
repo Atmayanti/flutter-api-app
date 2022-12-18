@@ -21,8 +21,18 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF4EEFF),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF6777EF),
+        backgroundColor: const Color(0xFF424874),
+        centerTitle: true,
+        elevation: 0,
+        title: const Text(
+          'Register Page',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -75,6 +85,7 @@ class _RegisterState extends State<Register> {
                       }
                       return null;
                     },
+                    obscureText: true,
                     controller: _passwordController,
                     decoration: const InputDecoration(
                       hintText: 'Password',
@@ -86,24 +97,23 @@ class _RegisterState extends State<Register> {
                   TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Password Confirmation is required';
+                        return 'Password confirmation is required';
                       } else if (value.length < 8) {
-                        return 'Password should more than 8 characters';
+                        return 'Password confirmation should more than 8 characters';
                       }
                       return null;
                     },
+                    obscureText: true,
                     controller: _confirmpasswordController,
                     decoration: const InputDecoration(
                       hintText: 'Password Confirmation',
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 40, 0, 15),
                     child: MaterialButton(
                       onPressed: () async {
                         if (_registerKey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
                           bool response = await registerService.postRegister(
                             _usernameController.text,
                             _emailController.text,
@@ -115,15 +125,37 @@ class _RegisterState extends State<Register> {
                           } else {}
                         }
                       },
-                      color: Colors.blue,
+                      color: const Color(0xFF424874),
                       minWidth: 500,
                       height: 60,
                       child: Text(
                         "Register",
                         style:
-                            const TextStyle(color: Colors.white, fontSize: 20),
+                            const TextStyle(color: const Color(0xFFF4EEFF), fontSize: 20),
                       ),
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Already have an account?"),
+                      TextButton(
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all(
+                            const Color(0xFF424874),
+                          ),
+                        ),
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(
+                            color: Color(0xFF424874),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),

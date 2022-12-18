@@ -13,8 +13,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/homepage': (context) => HomePage(),
-        '/login': (context) => MainApp(),
+        '/homepage': (context) => const HomePage(),
+        '/login': (context) => const MainApp(),
       },
       home: const LoginPage(),
     );
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.all(50),
             child: Form(
               key: _loginKey,
               child: Column(
@@ -77,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (value == null || value.isEmpty) {
                         return 'Email is required';
                       }
+                      return null;
                     },
                     controller: _emailController,
                     cursorColor: const Color(0xFF424874),
@@ -95,6 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       return null;
                     },
+                    obscureText: true,
                     controller: _passwordController,
                     cursorColor: const Color(0xFF424874),
                     decoration: const InputDecoration(
@@ -102,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 40, 0, 15),
+                    margin: const EdgeInsets.fromLTRB(0, 40, 0, 15),
                     child: MaterialButton(
                       color: const Color(0xFF424874),
                       onPressed: () async {
@@ -115,20 +117,24 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.of(context).popAndPushNamed('/homepage');
                           } else {
                             showDialog<String>(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                  title: const Text('Failed Login'),
-                                  backgroundColor: Color(0xFFDCD6F7),
-                                  content:
-                                      const Text('Incorrect email or password'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, 'OK'),
-                                      child: const Text('OK', style: TextStyle(color: Color(0xFF424874)),),
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: const Text('Failed Login'),
+                                backgroundColor: Color(0xFFDCD6F7),
+                                content:
+                                    const Text('Incorrect email or password'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, 'OK'),
+                                    child: const Text(
+                                      'OK',
+                                      style:
+                                          TextStyle(color: Color(0xFF424874)),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
+                              ),
                               // child: const Text('Show Dialog'),
                             );
                             setState(() {
@@ -141,7 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                       height: 60,
                       child: const Text(
                         "Login",
-                        style: TextStyle(color: Color(0xFFF4EEFF), fontSize: 20),
+                        style:
+                            TextStyle(color: Color(0xFFF4EEFF), fontSize: 20),
                       ),
                     ),
                   ),

@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
         '/category/add': (context) => const AddCategory(),
         '/category/update': (context) => const UpdateCategory(),
       },
-      home: LoginPage(),
+      home: const LoginPage(),
     );
   }
 }
