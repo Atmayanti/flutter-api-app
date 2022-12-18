@@ -101,9 +101,6 @@ class _RegisterState extends State<Register> {
                     margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                     child: MaterialButton(
                       onPressed: () async {
-                        // if (_registerKey.currentState!.validate()) {
-                        //   Navigator.pushNamed(context, '/login');
-                        // }
                         if (_registerKey.currentState!.validate()) {
                           // If the form is valid, display a snackbar. In the real world,
                           // you'd often call a server or save the information in a database.

@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
         '/homepage': (context) => HomePage(),
         '/login': (context) => MainApp(),
       },
-      home: LoginPage(),
+      home: const LoginPage(),
     );
   }
 }
@@ -29,88 +29,147 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   LoginService loginService = LoginService();
+  final _loginKey = GlobalKey<FormState>();
+  bool isLoginFalse = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: const Color(0xFFF4EEFF),
         appBar: AppBar(
-          backgroundColor: Colors.blue,
+          backgroundColor: const Color(0xFF424874),
           centerTitle: true,
           elevation: 0,
-          title: const Text('Login Page',style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          title: const Text(
+            'Login Page',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(18),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              TextField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(
-                    hintText: 'Email',
-                  ),
-                ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(
-                    hintText: 'Password',
-                  ),
-                ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                child: MaterialButton(
-                  color: Colors.blue,
-                  onPressed: () async {
-                    bool response = await loginService.postData(
-                        _emailController.text, _passwordController.text);
-                    if (response) {
-                      // jika response true
-                      Navigator.of(context).popAndPushNamed('/homepage');
-                    } else {
-                      // jika false
-                      print('failed login');
-                    }
-                  },
-                  minWidth: 500,
-                  height: 60,
-                  child: Text("Login",
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
-              ),
-              Row(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: Form(
+              key: _loginKey,
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account?"),
-                  TextButton(
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(
-                        Colors.blue,
+                  const Center(
+                    child: Image(
+                      width: 300,
+                      image: AssetImage(
+                        '../../assets/login.png',
                       ),
                     ),
-                    child: const Text('Register'),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/register');
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Email is required';
+                      }
                     },
+                    controller: _emailController,
+                    cursorColor: const Color(0xFF424874),
+                    decoration: const InputDecoration(
+                      hintText: 'Email',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    // The validator receives the text that the user has entered.
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Password is required';
+                      }
+                      return null;
+                    },
+                    controller: _passwordController,
+                    cursorColor: const Color(0xFF424874),
+                    decoration: const InputDecoration(
+                      hintText: 'Password',
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 40, 0, 15),
+                    child: MaterialButton(
+                      color: const Color(0xFF424874),
+                      onPressed: () async {
+                        if (_loginKey.currentState!.validate()) {
+                          bool response = await loginService.postData(
+                            _emailController.text,
+                            _passwordController.text,
+                          );
+                          if (response) {
+                            Navigator.of(context).popAndPushNamed('/homepage');
+                          } else {
+                            showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Failed Login'),
+                                  backgroundColor: Color(0xFFDCD6F7),
+                                  content:
+                                      const Text('Incorrect email or password'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK', style: TextStyle(color: Color(0xFF424874)),),
+                                    ),
+                                  ],
+                                ),
+                              // child: const Text('Show Dialog'),
+                            );
+                            setState(() {
+                              isLoginFalse = true;
+                            });
+                          }
+                        }
+                      },
+                      minWidth: 500,
+                      height: 60,
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(color: Color(0xFFF4EEFF), fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Don't have an account?"),
+                      TextButton(
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all(
+                            const Color(0xFF424874),
+                          ),
+                        ),
+                        child: const Text(
+                          "Register",
+                          style: TextStyle(
+                            color: Color(0xFF424874),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/register');
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),
