@@ -22,9 +22,18 @@ class _UpdateCategoryState extends State<UpdateCategory> {
       _categoryname.text = args[1];
     }
     return Scaffold(
+      backgroundColor: const Color(0xFFF4EEFF),
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: const Text("Update Category"),
+        backgroundColor: const Color(0xFF424874),
+        centerTitle: true,
+        elevation: 0,
+        title: const Text(
+          'Edit Category Page',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +41,7 @@ class _UpdateCategoryState extends State<UpdateCategory> {
           const Text(
             'Update Category',
             style: TextStyle(
-              color: Colors.blue,
+              color: const Color(0xFF424874),
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -54,13 +63,13 @@ class _UpdateCategoryState extends State<UpdateCategory> {
                       labelText: 'Category name',
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            width: 1, color: Colors.blue,
+                            width: 1, color: const Color(0xFF424874),
                         ),
                       ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 1,
-                          color: Colors.blue,
+                          color: const Color(0xFF424874),
                         ),
                       ),
                     ),
@@ -70,11 +79,11 @@ class _UpdateCategoryState extends State<UpdateCategory> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    height: 35,
+                    height: 45,
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.blue,
+                          const Color(0xFF424874),
                         ),
                       ),
                       onPressed: () async {
@@ -84,7 +93,8 @@ class _UpdateCategoryState extends State<UpdateCategory> {
                               );
                         }
                       },
-                      child: const Text('Update'),
+                      child: const Text('Submit', style: TextStyle(fontSize: 18),
+                      ),
                     ),
                   ),
                 ],

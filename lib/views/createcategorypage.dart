@@ -24,7 +24,7 @@ class _AddCategoryState extends State<AddCategory> {
         centerTitle: true,
         elevation: 0,
         title: const Text(
-          'Add Category Page',
+          'Create Category Page',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
