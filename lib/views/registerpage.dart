@@ -9,11 +9,11 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController(text: "Atmayanti");
+  final TextEditingController _emailController = TextEditingController(text: "atmayanti@gmail.com");
+  final TextEditingController _passwordController = TextEditingController(text: "password");
   final TextEditingController _confirmpasswordController =
-      TextEditingController();
+      TextEditingController(text: "password");
   final _registerKey = GlobalKey<FormState>();
 
   RegisterService registerService = RegisterService();

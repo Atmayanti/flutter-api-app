@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         elevation: 0,
         title: const Text(
-          'Login Page',
+          'Home Page',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
